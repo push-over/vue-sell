@@ -19,6 +19,11 @@
 <script>
 import Header from './common/header/Index';
 export default {
+  data() {
+    return {
+      seller: {}
+    };
+  },
   components: {
     'v-header': Header
   }

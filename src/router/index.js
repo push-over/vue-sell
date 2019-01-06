@@ -20,6 +20,10 @@ export default new Router({
       path: '/seller',
       name: 'seller',
       component: () => import('../pages/seller/Index')
+    },
+    {
+      path: '*',
+      redirect: '/goods'
     }
   ]
 });
