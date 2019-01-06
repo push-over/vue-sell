@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-header></v-header>
+    <v-header :seller="seller"></v-header>
     <div class="tab">
       <div class="tab-item border-1px">
         <router-link to="/goods">商品</router-link>
@@ -18,6 +18,9 @@
 
 <script>
 import Header from './common/header/Index';
+
+const ERR_OK = 0;
+
 export default {
   data() {
     return {
@@ -26,12 +29,23 @@ export default {
   },
   components: {
     'v-header': Header
+  },
+  created() {
+    this.$http.get('/api/seller').then((response) => {
+      response = response.body;
+      if (response.errno === ERR_OK) {
+        this.seller = response.data;
+      }
+    }, response => {
+
+    });
   }
 };
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "./assets/stylus/mixin.styl";
+
   .tab
     display flex
     width 100%
