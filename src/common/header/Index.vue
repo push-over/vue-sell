@@ -1,14 +1,18 @@
 <template>
   <div class="header">
     <div class="content-wrapper">
+      <!-- 店铺LOGO -->
       <div class="avatar">
         <img :src="seller.avatar" width="64" height="64" alt="">
       </div>
+      <!-- 店铺内容 -->
       <div class="content">
+        <!-- 店铺名称 -->
         <div class="title">
           <span class="brand"></span>
           <span class="name">{{ seller.name }}</span>
         </div>
+        <!-- 其他描述 -->
         <div class="description">
           {{ seller.description }}/{{ seller.deliveryTime }}分钟送达
         </div>
@@ -17,38 +21,57 @@
           <span class="text">{{ seller.supports[0].description }}</span>
         </div>
       </div>
-      <div v-if="seller.supports" class="support-count">
+      <div v-if="seller.supports" class="support-count" @click="showDetail">
         <span class="count">{{ seller.supports.length }}个</span>
         <i class="iconfont">&#xe606;</i>
       </div>
     </div>
-    <div class="bulletin-wrapper">
+    <!-- 店铺公告信息 -->
+    <div class="bulletin-wrapper" @click="showDetail">
       <span class="bulletin-title"></span>
       <span class="bulletin-text">{{ seller.bulletin }}</span>
       <i class="iconfont">&#xe606;</i>
     </div>
+    <!-- 店铺背景图 -->
     <div class="background">
       <img :src="seller.avatar" width="100%" height="100%" alt="">
     </div>
+    <v-detail :header="this"></v-detail>
   </div>
 </template>
 
 <script>
+import Detail from './components/Detail';
+
 export default {
   props: ['seller'],
   data() {
     return {
-      classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee']
+      classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
+      detailShow: false
     };
+  },
+  methods: {
+    showDetail() {
+      this.detailShow = true;
+    },
+
+    closeDetail() {
+      this.detailShow = false;
+    }
+  },
+   components: {
+    'v-detail': Detail
   }
 };
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus" scoped>
+<style lang="stylus" scoped>
   @import '../../assets/stylus/mixin.styl';
 
   .header
     position relative
+    overflow hidden
     color #fff
     background rgba(7, 17, 27, 0.5)
     .content-wrapper
