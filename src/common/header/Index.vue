@@ -5,13 +5,16 @@
       <div class="avatar">
         <img :src="seller.avatar" width="64" height="64" alt="">
       </div>
+
       <!-- 店铺内容 -->
       <div class="content">
+
         <!-- 店铺名称 -->
         <div class="title">
           <span class="brand"></span>
           <span class="name">{{ seller.name }}</span>
         </div>
+
         <!-- 其他描述 -->
         <div class="description">
           {{ seller.description }}/{{ seller.deliveryTime }}分钟送达
@@ -26,16 +29,20 @@
         <i class="iconfont">&#xe606;</i>
       </div>
     </div>
+
     <!-- 店铺公告信息 -->
     <div class="bulletin-wrapper" @click="showDetail">
       <span class="bulletin-title"></span>
       <span class="bulletin-text">{{ seller.bulletin }}</span>
       <i class="iconfont">&#xe606;</i>
     </div>
+
     <!-- 店铺背景图 -->
     <div class="background">
       <img :src="seller.avatar" width="100%" height="100%" alt="">
     </div>
+
+    <!-- detail组件 -->
     <v-detail :header="this"></v-detail>
   </div>
 </template>
@@ -56,7 +63,7 @@ export default {
       this.detailShow = true;
     },
 
-    closeDetail() {
+    hideDetail() {
       this.detailShow = false;
     }
   },
