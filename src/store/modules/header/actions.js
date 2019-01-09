@@ -1,5 +1,3 @@
-// import defaultState from './defaultState';
-
 export default {
   getSellerInfo ({commit}) {
     this._vm.$http.get('/api/seller').then((response) => {

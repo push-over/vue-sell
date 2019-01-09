@@ -1,10 +1,9 @@
 import actions from './actions';
 import getters from './getters';
-import mutations from './mutations';
+import mutations from './mutaions';
 
 const state = {
-  seller: [],
-  detailShow: false,
+  goods: [],
   classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee']
 };
 

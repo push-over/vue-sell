@@ -54,7 +54,7 @@ import { mapState, mapActions } from 'vuex';
 export default {
   computed: {
     ...mapState({
-      seller: state => state.header.sellerData,
+      seller: state => state.header.seller,
       classMap: state => state.header.classMap
     })
   },

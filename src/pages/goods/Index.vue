@@ -39,22 +39,23 @@
 </template>
 
 <script>
-const ERR_OK = 0;
+import { mapState, mapActions } from 'vuex';
 export default {
-  props: ['seller'],
-  data() {
-    return {
-      goods: [],
-      classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee']
-    };
+  computed: {
+    ...mapState('goods', {
+      goods: state => state.goods,
+      classMap: state => state.classMap
+    })
   },
+
+  methods: {
+    ...mapActions('goods', [
+      'getGoodsInfo'
+    ])
+  },
+
   created() {
-    this.$http.get('/api/goods').then((response) => {
-        response = response.body;
-        if (response.errno === ERR_OK) {
-          this.goods = response.data;
-        }
-    });
+    this.getGoodsInfo();
   }
 };
 </script>
