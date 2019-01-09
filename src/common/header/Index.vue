@@ -24,14 +24,14 @@
           <span class="text">{{ seller.supports[0].description }}</span>
         </div>
       </div>
-      <div v-if="seller.supports" class="support-count" @click="showDetail">
+      <div v-if="seller.supports" class="support-count" @click="this.setDetailShow">
         <span class="count">{{ seller.supports.length }}个</span>
         <i class="iconfont">&#xe606;</i>
       </div>
     </div>
 
     <!-- 店铺公告信息 -->
-    <div class="bulletin-wrapper" @click="showDetail">
+    <div class="bulletin-wrapper" @click="this.setDetailShow">
       <span class="bulletin-title"></span>
       <span class="bulletin-text">{{ seller.bulletin }}</span>
       <i class="iconfont">&#xe606;</i>
@@ -42,33 +42,36 @@
       <img :src="seller.avatar" width="100%" height="100%" alt="">
     </div>
 
-    <!-- detail组件 -->
-    <v-detail :header="this"></v-detail>
+    <!-- 店铺简介组件 -->
+    <v-detail></v-detail>
   </div>
 </template>
 
 <script>
 import Detail from './components/Detail';
+import { mapState, mapActions } from 'vuex';
 
 export default {
-  props: ['seller'],
-  data() {
-    return {
-      classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
-      detailShow: false
-    };
+  computed: {
+    ...mapState({
+      seller: state => state.header.sellerData,
+      classMap: state => state.header.classMap
+    })
   },
-  methods: {
-    showDetail() {
-      this.detailShow = true;
-    },
 
-    hideDetail() {
-      this.detailShow = false;
-    }
+  methods: {
+    ...mapActions('header', [
+      'getSellerInfo',
+      'setDetailShow'
+    ])
+  },
+
+  created() {
+    // 获取店铺信息
+    this.getSellerInfo();
   },
    components: {
-    'v-detail': Detail
+    'v-detail': Detail // 店铺简介
   }
 };
 </script>

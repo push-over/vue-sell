@@ -1,14 +1,14 @@
 <template>
   <transition name="fade">
-    <div v-show="header.detailShow" class="detail">
+    <div v-show="detailShow" class="detail">
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
           <!-- 店铺名称 -->
-          <h1 class="name">{{ header.seller.name }}</h1>
+          <h1 class="name">{{ seller.name }}</h1>
 
           <!-- 评分组件 -->
           <div class="star-wrapper">
-            <v-star :size="48" :score="header.seller.score"></v-star>
+            <v-star :size="48" :score="seller.score"></v-star>
           </div>
 
           <!-- 优惠信息 -->
@@ -17,10 +17,10 @@
             <div class="text">优惠信息</div>
             <div class="line"></div>
           </div>
-          <ul v-if="header.seller.supports" class="support">
-            <li v-for="(item,index) in header.seller.supports" :key="index" class="support-item">
-              <span class="icon" :class="header.classMap[header.seller.supports[index].type]"></span>
-              <span class="text">{{ header.seller.supports[index].description }}</span>
+          <ul v-if="seller.supports" class="support">
+            <li v-for="(item,index) in seller.supports" :key="index" class="support-item">
+              <span class="icon" :class="classMap[seller.supports[index].type]"></span>
+              <span class="text">{{ seller.supports[index].description }}</span>
             </li>
           </ul>
 
@@ -31,13 +31,13 @@
             <div class="line"></div>
           </div>
           <div class="bulletin">
-            <p class="content">{{ header.seller.bulletin }}</p>
+            <p class="content">{{ seller.bulletin }}</p>
           </div>
         </div>
       </div>
 
       <!-- 关闭按钮 -->
-      <div class="detail-close" @click="header.hideDetail">
+      <div class="detail-close" @click="this.setHideDetail">
         <i class="iconfont">&#xe604;</i>
       </div>
     </div>
@@ -46,9 +46,23 @@
 
 <script>
 import Star from '../../star/Index';
+import { mapState, mapActions } from 'vuex';
 
 export default {
-  props: ['header'],
+  computed: {
+    ...mapState('header', {
+      seller: state => state.sellerData,
+      detailShow: state => state.detailShow,
+      classMap: state => state.classMap
+    })
+  },
+
+  methods: {
+    ...mapActions('header', [
+      'setHideDetail'
+    ])
+  },
+
   components: {
     'v-star': Star
   }
