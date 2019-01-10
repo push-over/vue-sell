@@ -4,7 +4,9 @@ import mutations from './mutaions';
 
 const state = {
   goods: [],
-  classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee']
+  classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
+  listHeight: [],
+  scrollY: 0
 };
 
 export default {
