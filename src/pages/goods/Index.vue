@@ -16,12 +16,14 @@
 
       <!-- 商品列表 -->
       <v-item ref="foodsWrapper"></v-item>
+      <v-shop-cart></v-shop-cart>
       <router-view></router-view>
     </div>
 </template>
 
 <script>
 import Item from './components/Item';
+import ShopCart from './components/ShopCart';
 import { mapState, mapActions } from 'vuex';
 import Bscroll from 'better-scroll';
 
@@ -103,7 +105,8 @@ export default {
   },
 
   components: {
-    'v-item': Item
+    'v-item': Item,
+    'v-shop-cart': ShopCart
   }
 };
 </script>

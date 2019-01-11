@@ -6,7 +6,18 @@ const state = {
   goods: [],
   classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
   listHeight: [],
-  scrollY: 0
+  scrollY: 0,
+  total: [
+    {
+      id: 1,
+      price: 20
+    },
+    {
+      id: 2,
+      price: 30
+    }
+  ],
+  totalPrice: 0
 };
 
 export default {
