@@ -19,6 +19,9 @@
                 <span class="now">￥{{ food.price }}</span>
                 <span class="old" v-show="food.oldPrice">￥{{ food.oldPrice }}</span>
               </div>
+              <div class="cartcontrol-wrapper">
+                <v-cart-control :food="food"></v-cart-control>
+              </div>
             </div>
           </li>
         </ul>
@@ -28,6 +31,7 @@
 </template>
 
 <script>
+import CartControl from '../../../common/cartcontrol/Index';
 import { mapState } from 'vuex';
 
 export default {
@@ -36,6 +40,10 @@ export default {
     ...mapState('goods', {
       goods: state => state.goods
     })
+  },
+
+  components: {
+    'v-cart-control': CartControl
   }
 };
 </script>
@@ -93,4 +101,8 @@ export default {
             text-decoration line-through
             font-size 10px
             color rgb(147, 153, 159p)
+        .cartcontrol-wrapper
+          position absolute
+          right 0
+          bottom 12px
 </style>

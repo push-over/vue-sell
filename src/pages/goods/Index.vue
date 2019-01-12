@@ -16,8 +16,7 @@
 
       <!-- 商品列表 -->
       <v-item ref="foodsWrapper"></v-item>
-      <v-shop-cart></v-shop-cart>
-      <router-view></router-view>
+      <v-shop-cart :selectFoods="selectFoods"></v-shop-cart>
     </div>
 </template>
 
@@ -56,6 +55,19 @@ export default {
         }
       }
       return 0;
+    },
+
+    // 添加商品到购物车
+    selectFoods() {
+      let foods = [];
+      this.goods.forEach(good => {
+        good.foods.forEach((food) => {
+          if (food.count) {
+            foods.push(food);
+          }
+        });
+      });
+      return foods;
     }
   },
 
@@ -72,6 +84,7 @@ export default {
         click: true
       });
       this.foodsScroll = new Bscroll(this.$refs.foodsWrapper.$refs.foodsWrapper, {
+        click: true,
         probeType: 3
       });
 

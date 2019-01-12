@@ -3,7 +3,6 @@
     <div class="content">
       <div class="content-left">
         <div class="logo-wrapper">
-<<<<<<< HEAD
           <div class="logo" :class="{'highlight' : totalCount > 0}">
             <i class="iconfont" :class="{'highlight' : totalCount > 0}">&#xe609;</i>
           </div>
@@ -15,18 +14,6 @@
       <div class="content-right">
         <div class="pay" :class="payClass">
           {{ payDesc }}
-=======
-          <div class="logo">
-            <i class="iconfont">&#xe609;</i>
-          </div>
-        </div>
-        <div class="price">￥{{ totalPrice }}</div>
-        <div class="desc">另需派送费￥{{ seller.deliveryPrice }}元</div>
-      </div>
-      <div class="content-right">
-        <div class="pay">
-          ￥{{ seller.minPrice }}元起送
->>>>>>> master
         </div>
       </div>
     </div>
@@ -36,14 +23,12 @@
 <script>
 import { mapState } from 'vuex';
 export default {
+  props: ['selectFoods'],
+
   computed: {
     ...mapState({
-      seller: state => state.header.seller,
-      goods: state => state.goods.goods,
-<<<<<<< HEAD
-      selectFoods: state => state.goods.selectFoods
+      seller: state => state.header.seller
     }),
-
     // 计算总价格
     totalPrice() {
       let totalPrice = 0;
@@ -67,9 +52,9 @@ export default {
     // 计算是否满足起送价
     payDesc() {
       if (this.totalPrice === 0) {
-        return `￥${this.minPrice}元起送`;
-      } else if (this.totalPrice < this.minPrice) {
-        return `还差￥${this.minPrice - this.totalPrice}元起送`;
+        return `￥${this.seller.minPrice}元起送`;
+      } else if (this.totalPrice < this.seller.minPrice) {
+        return `还差￥${this.seller.minPrice - this.totalPrice}元起送`;
       } else {
         return '去结算';
       }
@@ -82,19 +67,6 @@ export default {
       } else {
         return 'enough';
       }
-=======
-      total: state => state.goods.total
-      // totalPrice: state => state.goods.totalPrice
-    }),
-
-    totalPrice() {
-      let totalPrice = 0;
-      this.total.forEach(goods => {
-        totalPrice += goods.price;
-      });
-
-      return totalPrice;
->>>>>>> master
     }
   }
 };
@@ -133,16 +105,12 @@ export default {
               border-radius 50%
               text-align center
               background #2b343c
-<<<<<<< HEAD
               &.highlight
                 background rgb(0, 160, 220)
-=======
->>>>>>> master
               .iconfont
                 line-height 44px
                 font-size 24px
                 color #80858a
-<<<<<<< HEAD
                 &.highlight
                   color #fff
           .num
@@ -159,8 +127,6 @@ export default {
             color #fff
             background rgb(240, 20, 20)
             box-shadow 0 4px 8px 0 rgba(0, 0, 0, 0.4)
-=======
->>>>>>> master
         .price
           display inline-block
           vertical-align top
@@ -171,11 +137,8 @@ export default {
           border-right 1px solid rgba(255, 255, 255, 0.1)
           font-size 16px
           font-weight 700
-<<<<<<< HEAD
           &.highlight
             color #fff
-=======
->>>>>>> master
         .desc
           display inline-block
           vertical-align top
@@ -191,13 +154,9 @@ export default {
           text-align center
           font-size 12px
           font-weight 700
-<<<<<<< HEAD
           &.not-enough
             background #2b343c
           &.enough
             background #00b43c
             color #fff
-=======
-          background #2b343c
->>>>>>> master
 </style>
